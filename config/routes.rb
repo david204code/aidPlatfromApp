@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create]
   # get 'sessions/create'
+
+  resources :registrations, only: [:create]
   
   get 'pages/index'
   get 'pages/home'
