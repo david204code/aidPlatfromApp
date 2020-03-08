@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  
   root 'pages#index'
+
+  resources :sessions, only: [:create]
+  # get 'sessions/create'
   
   get 'pages/index'
   get 'pages/home'
