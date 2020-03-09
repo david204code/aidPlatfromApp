@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './auth/Home';
 import Dashboard from './auth/Dashboard';
-import Registration from '../components/auth/Registration';
+import axios from 'axios';
 
 class App extends React.Component {
 
@@ -13,6 +13,15 @@ class App extends React.Component {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {}
     }
+
+    this.handleLogin =this.handleLogin.bind(this);
+  }
+
+  handleLogin(data) {
+    this.setState({
+      loggedInStatus: "Logged_In",
+      user: data.user
+    });
   }
 
 
@@ -26,7 +35,8 @@ class App extends React.Component {
               exact path ="/"
               render ={props => (
                 <Home {...props}
-                loggedInStatus ={this.state.loggedInStatus} />
+                loggedInStatus ={this.state.loggedInStatus}
+                handleLogin={this.handleLogin}  />
               )}
             />
             <Route 
