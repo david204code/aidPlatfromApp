@@ -4,6 +4,12 @@ import Registration from "./Registration";
 class Home extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+  }
+
+  handleSuccessfulAuth(data) {
+    this.props.history.push("/dashboard");
   }
 
   render() {
@@ -11,7 +17,7 @@ class Home extends React.Component {
       <div>
         <h1>Home</h1>
         <h1>Status: {this.props.loggedInStatus}</h1>
-        <Registration />
+        <Registration handleSuccessfulAuth ={this.handleSuccessfulAuth} />
       </div>
     );
   }
