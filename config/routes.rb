@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
   
-  root 'pages#index'
-  match '*pages', to: 'pages#index', via: :all
-
   resources :sessions, only: [:create]
-  # get 'sessions/create'
+  resources :registrations, only: [:create]
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
-
-  resources :registrations, only: [:create]
+  root 'pages#index'
   
+  # get 'sessions/create'
   get 'pages/index'
   get 'pages/home'
+  
+  match '*pages', to: 'pages#index', via: :all
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

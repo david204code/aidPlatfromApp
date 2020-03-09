@@ -1,5 +1,5 @@
-
 class SessionsController < ApplicationController
+  include CurrentUserConcern
 
   #post request
   def create
