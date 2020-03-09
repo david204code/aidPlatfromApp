@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   root 'pages#index'
+  match '*pages', to: 'pages#index', via: :all
 
   resources :sessions, only: [:create]
   # get 'sessions/create'

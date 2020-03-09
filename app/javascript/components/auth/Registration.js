@@ -11,7 +11,7 @@ class Registration extends React.Component {
       password: "",
       password_confirmation: "",
       registrationErrors: ""
-    }
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,10 +20,12 @@ class Registration extends React.Component {
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
-    })
+    });
   }
 
   handleSubmit(event) {
+    const { email, password, password_confirmation } =this.state;
+
     axios
     .post("http://localhost:3000/registrations", 
     {
@@ -50,30 +52,30 @@ class Registration extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input 
-          type="email" 
-          name="email" 
-          placeholder="Your Email" 
-          value={this.state.email} 
-          onChange={this.handleChange} 
-          required 
+            type="email" 
+            name="email" 
+            placeholder="Your Email" 
+            value={this.state.email} 
+            onChange={this.handleChange} 
+            required 
           />
 
           <input 
-          type="password"
-          name="password"
-          placeholder="Your password"
-          value={this.state.password}
-          onChange={this.handleChange}
-          required
+            type="password"
+            name="password"
+            placeholder="Your password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            required
           />
 
           <input
-          type="password"
-          name="password_confirmation"
-          placeholder="Confirm password"
-          value={this.state.password_confirmation}
-          onChange={this.handleChange}
-          required
+            type="password"
+            name="password_confirmation"
+            placeholder="Confirm password"
+            value={this.state.password_confirmation}
+            onChange={this.handleChange}
+            required
           />
 
           <button type="submit">Register</button>

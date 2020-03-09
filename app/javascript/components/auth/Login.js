@@ -9,7 +9,7 @@ class Login extends React.Component {
       email: "",
       password: "",
       loginErrors: ""
-    }
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -18,10 +18,12 @@ class Login extends React.Component {
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
-    })
+    });
   }
 
   handleSubmit(event) {
+    const { email, password } =this.state;
+    
     axios
     .post("http://localhost:3000/sessions", 
     {

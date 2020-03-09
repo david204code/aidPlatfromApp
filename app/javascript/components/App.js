@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {}
-    }
+    };
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
@@ -68,23 +68,25 @@ class App extends React.Component {
               exact path ="/"
               render ={props => (
                 <Home {...props}
-                loggedInStatus ={this.state.loggedInStatus}
                 handleLogin={this.handleLogin}  
-                handleLogOut={this.handleLogOut} />
+                handleLogOut={this.handleLogOut} 
+                loggedInStatus ={this.state.loggedInStatus} 
+                />
               )}
             />
             <Route 
               exact path ={"/dashboard"}
               render ={props => (
                 <Dashboard {...props}
-                loggedInStatus ={this.state.loggedInStatus} />
+                loggedInStatus ={this.state.loggedInStatus} 
+                />
               )}
             />      
 
           </Switch>
         </BrowserRouter>
       </div>
-    )
+    );
   }
 }
 
