@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './auth/Home';
 import Dashboard from './auth/Dashboard';
+import Map from './auth/Map';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -81,7 +82,11 @@ class App extends React.Component {
                 loggedInStatus ={this.state.loggedInStatus} 
                 />
               )}
-            />      
+            />
+            <Route 
+              exact path ={"/map"}
+              component ={Map}
+            />
 
           </Switch>
         </BrowserRouter>
