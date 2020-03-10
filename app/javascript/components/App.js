@@ -69,9 +69,19 @@ class App extends React.Component {
               exact path ="/"
               render ={props => (
                 <Home {...props}
-                handleLogin={this.handleLogin}  
-                handleLogOut={this.handleLogOut} 
-                loggedInStatus ={this.state.loggedInStatus} 
+                  handleLogin={this.handleLogin}  
+                  handleLogOut={this.handleLogOut} 
+                  loggedInStatus ={this.state.loggedInStatus} 
+                />
+              )}
+            />
+            <Route 
+              exact path ="/home"
+              render ={props => (
+                <Home {...props}
+                  handleLogin={this.handleLogin}  
+                  handleLogOut={this.handleLogOut} 
+                  loggedInStatus ={this.state.loggedInStatus} 
                 />
               )}
             />
@@ -82,10 +92,16 @@ class App extends React.Component {
                 loggedInStatus ={this.state.loggedInStatus} 
                 />
               )}
+              // component ={Dashboard}
             />
             <Route 
               exact path ={"/map"}
-              component ={Map}
+              render ={props => (
+                <Map {...props}
+                loggedInStatus ={this.state.loggedInStatus}
+                />
+              )}
+              // component ={Map}
             />
 
           </Switch>

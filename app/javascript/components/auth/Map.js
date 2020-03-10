@@ -23,23 +23,27 @@ class Map extends React.Component {
 
   render(){
     return (
-      <ReactMapGL
-        {...this.state.viewport}
-        width="80vw"
-        height="80vh"
-        mapStyle="mapbox://styles/mapbox/streets-v11"
-        onViewportChange={viewport => this.setState({viewport})}
-        mapboxApiAccessToken={TOKEN}
-        >
-        <Marker 
-          latitude={51.508} 
-          longitude={-0.140} 
-          offsetLeft={-20} 
-          offsetTop={-10}
+      <div>
+        <h1>Map, get involved now!</h1>
+        <h1>Status: {this.props.loggedInStatus}</h1>
+        <ReactMapGL
+          {...this.state.viewport}
+          width="80vw"
+          height="80vh"
+          mapStyle="mapbox://styles/mapbox/streets-v11"
+          onViewportChange={viewport => this.setState({viewport})}
+          mapboxApiAccessToken={TOKEN}
           >
-          <button>You are here</button>
-        </Marker>
-      </ReactMapGL>
+          <Marker 
+            latitude={51.508} 
+            longitude={-0.140} 
+            offsetLeft={-20} 
+            offsetTop={-10}
+            >
+            <button>You are here</button>
+          </Marker>
+        </ReactMapGL>
+      </div>
     );
   }
 }
