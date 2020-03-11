@@ -1,0 +1,2 @@
+class CommunityRequest < ApplicationRecord
+end
