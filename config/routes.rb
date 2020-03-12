@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   root 'pages#index'
   
-  # get 'sessions/create'
   get 'pages/index'
   get 'pages/home'
   

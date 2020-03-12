@@ -4,6 +4,7 @@ import Home from './auth/Home';
 import Dashboard from './auth/Dashboard';
 import Map from './auth/Map';
 import axios from 'axios';
+import Volunteering from './community_request/Volunteering';
 
 class App extends React.Component {
 
@@ -102,6 +103,11 @@ class App extends React.Component {
                 />
               )}
               // component ={Map}
+            />
+
+            <Route
+              exact path ={"/volunteering"}
+              component ={Volunteering}
             />
 
           </Switch>
