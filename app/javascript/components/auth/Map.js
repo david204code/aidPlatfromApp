@@ -25,6 +25,10 @@ class Map extends React.Component {
     console.log(e.lngLat);
   }
 
+  onDblClick(e) {
+    console.log("Hi" + e.lngLat);
+  }
+
   render(){
     return (
       <div>
@@ -32,12 +36,14 @@ class Map extends React.Component {
         <h1>Status: {this.props.loggedInStatus}</h1>
         <ReactMapGL
           {...this.state.viewport}
-          width="80vw"
-          height="80vh"
+          width="60vw"
+          height="60vh"
           mapStyle="mapbox://styles/mapbox/streets-v11"
           onViewportChange={viewport => this.setState({viewport})}
           mapboxApiAccessToken={TOKEN}
           onClick ={this.onClickMap}
+          onDblClick ={this.onDblClick}
+          doubleClickZoom ={false}
           >
           <Marker 
             latitude={51.508} 
