@@ -21,6 +21,10 @@ class Map extends React.Component {
     };
   }
 
+  onClickMap(e) {
+    console.log(e.lngLat);
+  }
+
   render(){
     return (
       <div>
@@ -33,6 +37,7 @@ class Map extends React.Component {
           mapStyle="mapbox://styles/mapbox/streets-v11"
           onViewportChange={viewport => this.setState({viewport})}
           mapboxApiAccessToken={TOKEN}
+          onClick ={this.onClickMap}
           >
           <Marker 
             latitude={51.508} 
