@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Map from '../auth/Map';
 
 class Volunteering extends React.Component {
   
@@ -48,6 +49,7 @@ class Volunteering extends React.Component {
   render() {
     return (
       <div>
+        <Map />
         <form onSubmit={this.handleSubmit}>          
           <input
             type ="text"

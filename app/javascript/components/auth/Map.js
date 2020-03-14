@@ -36,9 +36,9 @@ class Map extends React.Component {
     console.log("Hi", e.lngLat[0], e.lngLat[1]);
   }
 
-  _updateViewport = viewport => {
-    this.setState({viewport});
-  };
+  // _updateViewport = viewport => {
+  //   this.setState({viewport});
+  // };
 
   _logDragEvent(name, event) {
     this.setState({
@@ -49,13 +49,13 @@ class Map extends React.Component {
     });
   }
   
-  _onMarkerDragStart = event => {
-    this._logDragEvent('onDragStart', event);
-  };
+  // _onMarkerDragStart = event => {
+  //   this._logDragEvent('onDragStart', event);
+  // };
   
-  _onMarkerDrag = event => {
-    this._logDragEvent('onDrag', event);
-  };
+  // _onMarkerDrag = event => {
+  //   this._logDragEvent('onDrag', event);
+  // };
   
   _onMarkerDragEnd = event => {
     this._logDragEvent('onDragEnd', event);
@@ -65,7 +65,7 @@ class Map extends React.Component {
         latitude: event.lngLat[1]
       }
     });
-    console.log(event.lngLat);
+    console.log("Longitude:",event.lngLat[0], "Latitude:", event.lngLat[1]);
   };
 
   render(){
