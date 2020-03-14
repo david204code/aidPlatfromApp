@@ -10,11 +10,18 @@ class Volunteering extends React.Component {
     this.state = {
       title: "", 
       description: "",
+      request_type: "",
+      location_lat: "",
+      location_long: "",
       volunteeringErrors: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  onClickMap(e) {
+    console.log(e.lngLat);
   }
 
   handleSubmit(event) {
@@ -24,7 +31,10 @@ class Volunteering extends React.Component {
       {
         communityRequest: {
           title: this.state.title,
-          description: this.state.description
+          description: this.state.description,
+          request_type: this.state.request_type,
+          location_lat: this.state.location_lat,
+          location_long: this.state.location_long
         }
       },
 
@@ -64,6 +74,30 @@ class Volunteering extends React.Component {
             name ="description"
             placeholder ="description"
             value ={this.state.description}
+            onChange ={this.handleChange}
+          />
+
+          <input
+            type ="text"
+            name ="request_type"
+            placeholder ="request_type"
+            value ={this.state.request_type}
+            onChange ={this.handleChange}
+          />
+
+          <input
+            type ="text"
+            name ="location_lat"
+            placeholder ="location_lat"
+            value ={this.state.location_lat}
+            onChange ={this.handleChange}
+          />
+
+          <input
+            type ="text"
+            name ="location_long"
+            placeholder ="location_long"
+            value ={this.state.location_long}
             onChange ={this.handleChange}
           />
 
