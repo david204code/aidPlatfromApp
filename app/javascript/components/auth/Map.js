@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactMapGL, {Marker} from 'react-map-gl';
+import MapPin from './MapPin';
 
 const TOKEN = 'pk.eyJ1IjoiZGF2aWQyMDRjb2RlMSIsImEiOiJjazc2YjdobGUwOTI0M2VvamwwZXpvZGR1In0.FSpShMuhbroEHA9-0iG4sg';
 
@@ -17,7 +18,13 @@ class Map extends React.Component {
         zoom: 14,
         bearing: 0,
         pitch: 0
-      }
+      },
+
+      marker: {
+        latitude: 51.508,
+        longitude: -0.140
+      },
+      event: {}
     };
   }
 
@@ -26,10 +33,44 @@ class Map extends React.Component {
   }
 
   onDblClick(e) {
-    console.log("Hi" + e.lngLat);
+    console.log("Hi", e.lngLat[0], e.lngLat[1]);
   }
 
+  _updateViewport = viewport => {
+    this.setState({viewport});
+  };
+
+  _logDragEvent(name, event) {
+    this.setState({
+      events: {
+        ...this.state.events,
+        [name]: event.lngLat
+      }
+    });
+  }
+  
+  _onMarkerDragStart = event => {
+    this._logDragEvent('onDragStart', event);
+  };
+  
+  _onMarkerDrag = event => {
+    this._logDragEvent('onDrag', event);
+  };
+  
+  _onMarkerDragEnd = event => {
+    this._logDragEvent('onDragEnd', event);
+    this.setState({
+      marker: {
+        longitude: event.lngLat[0],
+        latitude: event.lngLat[1]
+      }
+    });
+    console.log(event.lngLat);
+  };
+
   render(){
+    const {viewport, marker} = this.state;
+
     return (
       <div>
         <h1>Map, get involved now!</h1>
@@ -46,12 +87,16 @@ class Map extends React.Component {
           doubleClickZoom ={false}
           >
           <Marker 
-            latitude={51.508} 
-            longitude={-0.140} 
+            latitude={marker.latitude} 
+            longitude={marker.longitude} 
             offsetLeft={-20} 
             offsetTop={-10}
+            draggable
+            onDragStart={this._onMarkerDragStart}
+            onDrag={this._onMarkerDrag}
+            onDragEnd={this._onMarkerDragEnd}
             >
-            <button>You are here</button>
+            <MapPin size={20} />
           </Marker>
         </ReactMapGL>
       </div>
