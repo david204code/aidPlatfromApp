@@ -65,6 +65,9 @@ class Volunteering extends React.Component {
         latitude: event.lngLat[1]
       }
     });
+    this.setState({
+      location_lat: event.lngLat[0], location_long: event.lngLat[1] 
+    })
     console.log("Longitude:",event.lngLat[0], "Latitude:", event.lngLat[1]);
   };
 
@@ -104,7 +107,6 @@ class Volunteering extends React.Component {
     const {viewport, marker} = this.state;
     return (
       <div>
-        <h1>Location longitude: {this.state.location_long}</h1>
         {/* <Map /> */}
         <ReactMapGL
           {...this.state.viewport}
