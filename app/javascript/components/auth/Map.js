@@ -4,6 +4,7 @@ import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactMapGL, {Marker} from 'react-map-gl';
 import MapPin from './MapPin';
+import axios from 'axios';
 
 const TOKEN = 'pk.eyJ1IjoiZGF2aWQyMDRjb2RlMSIsImEiOiJjazc2YjdobGUwOTI0M2VvamwwZXpvZGR1In0.FSpShMuhbroEHA9-0iG4sg';
 

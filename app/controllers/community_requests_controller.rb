@@ -23,4 +23,11 @@ class CommunityRequestsController < ApplicationController
     end
   end
 
+  # Get request
+  def index
+    @community_requests = CommunityRequest.all
+    # @community_requests = CommunityRequest.first
+    render json: { data: @community_requests }
+  end
+
 end
