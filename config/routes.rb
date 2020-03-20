@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
   resources :community_requests
-
+  get 'community_requests', to: 'community_requests#index'
   root 'pages#index'
   
   get 'pages/index'

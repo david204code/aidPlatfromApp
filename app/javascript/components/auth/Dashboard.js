@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class Dashboard extends React.Component {
+  
+  constructor() {
+    super()
+    
+    this.state= {
+      community_requests: []
+    };  
+  }
 
-  constructor(props) {
-    super(props);
+  componentDidMount(){
+    axios.get('/community_requests.json')
+    .then(data => {
+      // debugger
+    })
+    .catch(data => {
+      // debugger
+    })
   }
 
   render() {
     return (
-    <div>
       <div>
-        <h1>Dashboard</h1>
-        <h1>Status: {this.props.loggedInStatus}</h1>
+        Hello
       </div>
-    </div>
-    );
+    )
   }
 }
 
