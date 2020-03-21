@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import ReactMapGL, {Marker} from 'react-map-gl';
+import MapPin from './MapPin';
 import axios from 'axios';
+
+const TOKEN = 'pk.eyJ1IjoiZGF2aWQyMDRjb2RlMSIsImEiOiJjazc2YjdobGUwOTI0M2VvamwwZXpvZGR1In0.FSpShMuhbroEHA9-0iG4sg';
 
 class Dashboard extends React.Component {
   
@@ -7,7 +12,22 @@ class Dashboard extends React.Component {
     super()
     
     this.state= {
-      community_requests: []
+      community_requests: [],
+
+      viewport: {
+        latitude: 51.508,
+        longitude: -0.140,
+        zoom: 14,
+        bearing: 0,
+        pitch: 0
+      },
+
+      marker: {
+        latitude: 51.508,
+        longitude: -0.140
+      },
+
+      event: []
     };  
   }
 
@@ -25,7 +45,6 @@ class Dashboard extends React.Component {
             request_type: data.request_type, 
             location_lat: data.location_lat, 
             location_long: data.location_long
-
           }
         )
 
@@ -41,17 +60,43 @@ class Dashboard extends React.Component {
       var community_requests = this.state.community_requests.map((community_request) => {
         return (
           <div key ={community_request.id}>
-            <p>{community_request.title}</p>
-            <p>{community_request.description}</p>
-            <p>{community_request.request_type}</p>
-            <p>{community_request.location_lat}</p>
-            <p>{community_request.location_long}</p>
+            <p>
+              $Title: {community_request.title} $Description: {community_request.description}
+              $Request_type: {community_request.request_type} $latitude: {community_request.location_lat}
+              $longtitude: {community_request.location_long}
+            </p>
           </div>
         )
-      })
+      });
+
+      const {viewport, marker} = this.state;
 
     return (
       <div>
+        <ReactMapGL
+          {...this.state.viewport}
+          width="60vw"
+          height="60vh"
+          mapStyle="mapbox://styles/mapbox/streets-v11"
+          onViewportChange={viewport => this.setState({viewport})}
+          mapboxApiAccessToken={TOKEN}
+          onClick ={this.onClickMap}
+          onDblClick ={this.onDblClick}
+          doubleClickZoom ={false}
+        >
+
+          {this.state.community_requests.map(community_request => (
+            <Marker
+              {...this.state.community_requests}
+              key={community_request.id}
+              latitude={parseFloat(community_request.location_lat)}
+              longitude={parseFloat(community_request.location_long)}
+            > 
+              <MapPin size={20} />
+            </Marker>
+          ))}
+
+        </ReactMapGL>
         {community_requests}
       </div>
     )
