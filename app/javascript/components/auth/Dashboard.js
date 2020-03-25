@@ -43,8 +43,8 @@ class Dashboard extends React.Component {
             title: data.title, 
             description: data.description, 
             request_type: data.request_type, 
-            location_lat: data.location_lat, 
-            location_long: data.location_long
+            location_long: data.location_long,
+            location_lat: data.location_lat 
           }
         )
 
@@ -62,8 +62,8 @@ class Dashboard extends React.Component {
           <div key ={community_request.id}>
             <p>
               $Title: {community_request.title} $Description: {community_request.description}
-              $Request_type: {community_request.request_type} $latitude: {community_request.location_lat}
-              $longtitude: {community_request.location_long}
+              $Request_type: {community_request.request_type} $longtitude: {community_request.location_long}
+              $latitude: {community_request.location_lat}
             </p>
           </div>
         )
@@ -91,6 +91,8 @@ class Dashboard extends React.Component {
               key={community_request.id}
               latitude={parseFloat(community_request.location_lat)}
               longitude={parseFloat(community_request.location_long)}
+              // latitude={parseFloat(community_request.location_long)}
+              // longitude={parseFloat(community_request.location_lat)}
             > 
               <MapPin size={20} />
             </Marker>

@@ -66,7 +66,7 @@ class Volunteering extends React.Component {
       }
     });
     this.setState({
-      location_lat: event.lngLat[0], location_long: event.lngLat[1] 
+      location_long: event.lngLat[0], location_lat: event.lngLat[1] 
     })
     console.log("Longitude:",event.lngLat[0], "Latitude:", event.lngLat[1]);
   };
@@ -80,8 +80,8 @@ class Volunteering extends React.Component {
           title: this.state.title,
           description: this.state.description,
           request_type: this.state.request_type,
-          location_lat: this.state.location_lat,
-          location_long: this.state.location_long
+          location_long: this.state.location_long,
+          location_lat: this.state.location_lat
         }
       },
 
