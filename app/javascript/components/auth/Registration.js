@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Registration extends React.Component {
@@ -49,37 +50,70 @@ class Registration extends React.Component {
   
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="Your Email" 
-            value={this.state.email} 
-            onChange={this.handleChange} 
-            required 
-          />
+      <div className ="container mt-5">
+        <div className ="row">
+          <div className ="col-md-6 offset-md-3">
+            <h1 className ="mb-5 text-center text-muted">
+              Join in by filling in this form!
+            </h1>
+            <form onSubmit={this.handleSubmit}>
+              <div className ="form-group">
+                <label htmlFor="">Email Address</label>
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="Your Email" 
+                  className="form-control"
+                  value={this.state.email} 
+                  onChange={this.handleChange} 
+                  required 
+                />
+              </div>
+              <div className ="form-group">
+                <label>Password</label>
+                <input 
+                  type="password"
+                  name="password"
+                  placeholder="Your password"
+                  className="form-control"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className ="form-group">
+                <label>Confirm password</label>
+                <input
+                  type="password"
+                  name="password_confirmation"
+                  placeholder="Confirm password"
+                  className ="form-control"
+                  value={this.state.password_confirmation}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className ="text-center">
+                <button type="submit" className ="btn btn-success mt-1">
+                  Register
+                </button>
+              </div>
+              <div className ="text-left">
+                <Link 
+                  to ="/login"
+                  className =""
+                  role = "button"
+                  >
+                  <button className ="btn btn-light mt-1">
+                    Log in instead
+                  </button>
+                </Link>
+              </div>
 
-          <input 
-            type="password"
-            name="password"
-            placeholder="Your password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            required
-          />
+            </form>
 
-          <input
-            type="password"
-            name="password_confirmation"
-            placeholder="Confirm password"
-            value={this.state.password_confirmation}
-            onChange={this.handleChange}
-            required
-          />
-
-          <button type="submit">Register</button>
-        </form>
+          </div>
+        </div>
       </div>
     );
   }

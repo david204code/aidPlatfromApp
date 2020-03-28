@@ -7,6 +7,7 @@ import axios from 'axios';
 import Volunteering from './community_request/Volunteering';
 import Welcome from './pages/Welcome';
 import Registration from './auth/Registration';
+import Login from './auth/Login';
 
 class App extends React.Component {
 
@@ -82,6 +83,16 @@ class App extends React.Component {
               exact path ="/registration"
               render ={props => (
                 <Registration {...props}
+                  handleLogin={this.handleLogin}
+                  handleLogOut={this.handleLogOut}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
+            <Route
+              exact path ="/login"
+              render ={props => (
+                <Login {...props}
                   handleLogin={this.handleLogin}
                   handleLogOut={this.handleLogOut}
                   loggedInStatus={this.state.loggedInStatus}
