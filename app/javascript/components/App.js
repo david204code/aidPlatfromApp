@@ -5,6 +5,8 @@ import Dashboard from './auth/Dashboard';
 import Map from './auth/Map';
 import axios from 'axios';
 import Volunteering from './community_request/Volunteering';
+import Welcome from './pages/Welcome';
+import Registration from './auth/Registration';
 
 class App extends React.Component {
 
@@ -69,10 +71,20 @@ class App extends React.Component {
             <Route 
               exact path ="/"
               render ={props => (
-                <Home {...props}
+                <Welcome {...props}
                   handleLogin={this.handleLogin}  
                   handleLogOut={this.handleLogOut} 
                   loggedInStatus ={this.state.loggedInStatus} 
+                />
+              )}
+            />
+            <Route 
+              exact path ="/registration"
+              render ={props => (
+                <Registration {...props}
+                  handleLogin={this.handleLogin}
+                  handleLogOut={this.handleLogOut}
+                  loggedInStatus={this.state.loggedInStatus}
                 />
               )}
             />
