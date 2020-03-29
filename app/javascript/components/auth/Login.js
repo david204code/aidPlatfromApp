@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Login extends React.Component {
@@ -48,29 +49,43 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={this.state.email}
-            onChange={this.handleChange}
-            required
-          />
-
-          <input 
-            type="password"
-            name="password"
-            placeholder="Your password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            required
-          />
-
-          <button type="submit">Login</button>
-        </form>
-      </div>
+        <div className ="">
+          <div className ="text-center">
+            <h1>Welcome back!</h1>
+            <h4>Great to see you, log in here</h4>
+          </div>
+          <form onSubmit={this.handleSubmit}>
+            <div className ="form-group">
+              <label>Email address</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                className="form-control"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+                />
+            </div>
+            <div className ="form-group">
+              <label>Password</label>
+              <input 
+                type="password"
+                name="password"
+                placeholder="Your password"
+                className="form-control"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className ="text-center mt-2">
+              <button type="submit" className ="btn btn-success mt-1">
+                Login
+                </button>
+            </div>
+          </form>
+        </div>
     );
   }
 }

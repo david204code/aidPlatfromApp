@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Login from '../auth/Login';
 
 class Welcome extends React.Component {
   render() {
@@ -43,6 +44,13 @@ class Welcome extends React.Component {
             Need help yourself? Make your own request.
           </p>
         </div>
+        
+        <div className ="row mb-3">
+          <div className ="col-md-6 offset-md-3">
+            <Login />
+          </div>
+        </div>
+
         <div className ="">
           <h3 className ="">Contact Us</h3>
           <p>
