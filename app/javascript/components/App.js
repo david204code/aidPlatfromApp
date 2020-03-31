@@ -7,6 +7,7 @@ import axios from 'axios';
 import Volunteering from './community_request/Volunteering';
 import Welcome from './pages/Welcome';
 import Registration from './auth/Registration';
+import SignUp from './auth/SignUp';
 import Login from './auth/Login';
 
 class App extends React.Component {
@@ -80,9 +81,9 @@ class App extends React.Component {
               )}
             />
             <Route 
-              exact path ="/registration"
+              exact path ="/signup"
               render ={props => (
-                <Registration {...props}
+                <SignUp {...props}
                   handleLogin={this.handleLogin}
                   handleLogOut={this.handleLogOut}
                   loggedInStatus={this.state.loggedInStatus}

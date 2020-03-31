@@ -33,7 +33,7 @@ class Welcome extends React.Component {
           <div className ="col-md-5 text-center pt-4">
             <h5>Get involve now!</h5>
             <Link 
-            to ="/registration"
+            to ="/signUp"
             className =""
             role = "button"
             >
