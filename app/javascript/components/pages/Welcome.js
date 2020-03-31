@@ -3,6 +3,18 @@ import { Link } from 'react-router-dom';
 import Login from '../auth/Login';
 
 class Welcome extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+  }
+
+  handleSuccessfulAuth(data) {
+    this.props.handleLogin(data);
+    this.props.history.push("/map");
+  }
+
   render() {
     return(
       <div className ="container">
@@ -47,7 +59,7 @@ class Welcome extends React.Component {
         
         <div className ="row mb-3">
           <div className ="col-md-6 offset-md-3">
-            <Login />
+            <Login handleSuccessfulAuth ={this.handleSuccessfulAuth} />
           </div>
         </div>
 

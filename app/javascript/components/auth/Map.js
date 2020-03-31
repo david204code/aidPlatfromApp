@@ -1,8 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import ReactMapGL, {Marker} from 'react-map-gl';
+import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 import MapPin from './MapPin';
 import axios from 'axios';
 
@@ -27,6 +26,16 @@ class Map extends React.Component {
         latitude: 51.508,
         longitude: -0.140
       },
+
+      popupInfo: null,
+
+      selectedPark: null,
+      setSelectedPark: null,
+
+      showPopup: true,
+
+      selectedHotspot: null,
+
       event: {}
     };
   }
@@ -83,9 +92,34 @@ class Map extends React.Component {
     })
   }
 
+  _onClickMarker = event => {
+    this.setState({popupInfo: event});
+    console.log("Clicked");
+  };
+
+  _renderPopup() {
+    const {popupInfo} = this.state;
+
+    return (
+      popupInfo && (
+        <Popup
+          tipSize={5}
+          anchor="top"
+          longitude={popupInfo.longitude}
+          latitude={popupInfo.latitude}
+          closeOnClick={false}
+          onClose={() => this.setState({popupInfo: null})}
+        >
+          <community_requests info={popupInfo} />
+        </Popup>
+      )
+    );
+  }
+
   render(){
     // const {viewport, marker} = this.state;
-
+    const {showPopup} = this.state;
+    const setSelectedPark = this.state;
     return (
       <div>
         <h1>Map, get involved now!</h1>
@@ -101,7 +135,6 @@ class Map extends React.Component {
             onDblClick ={this.onDblClick}
             doubleClickZoom ={false}
           >
-
           {this.state.community_requests.map(community_request => (
             <Marker
               {...this.state.community_requests}
@@ -109,10 +142,33 @@ class Map extends React.Component {
                 latitude={parseFloat(community_request.location_lat)}
                 longitude={parseFloat(community_request.location_long)}
               > 
-              <MapPin size={20} />
+              {/* <button
+                className="marker-btn"
+                  onClick={e => {
+                    e.preventDefault();
+                    setSelectedPark(community_request);
+                  }}
+                >
+                <img src="" alt="Skate Park Icon" />
+              </button> */}
+              <MapPin size={20} data={this.state.community_requests} onClick={this._onClickMarker}/>
+              {this._renderPopup()}
             </Marker>
           ))}
           
+          {/* {showPopup && <Popup
+              longitude={-0.1372005686243379}
+              latitude={51.50805600061942}
+              closeButton={true}
+              closeOnClick={false}
+              onClose={() => this.setState({showPopup: false})}
+              anchor="top"
+            > 
+            <div>
+              You are here!
+            </div>           
+            </Popup>}   */}
+            
         </ReactMapGL>
       </div>
     );
