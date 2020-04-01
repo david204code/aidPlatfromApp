@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 import MapPin from './MapPin';
+import Request from './Request';
 import axios from 'axios';
 
 const TOKEN = 'pk.eyJ1IjoiZGF2aWQyMDRjb2RlMSIsImEiOiJjazc2YjdobGUwOTI0M2VvamwwZXpvZGR1In0.FSpShMuhbroEHA9-0iG4sg';
@@ -29,13 +30,6 @@ class Map extends React.Component {
 
       popupInfo: null,
 
-      selectedPark: null,
-      setSelectedPark: null,
-
-      showPopup: true,
-
-      selectedHotspot: null,
-
       event: {}
     };
   }
@@ -48,25 +42,25 @@ class Map extends React.Component {
     console.log("Hi", e.lngLat[0], e.lngLat[1]);
   }
 
-  _logDragEvent(name, event) {
-    this.setState({
-      events: {
-        ...this.state.events,
-        [name]: event.lngLat
-      }
-    });
-  }
+  // _logDragEvent(name, event) {
+  //   this.setState({
+  //     events: {
+  //       ...this.state.events,
+  //       [name]: event.lngLat
+  //     }
+  //   });
+  // }
  
-  _onMarkerDragEnd = event => {
-    this._logDragEvent('onDragEnd', event);
-    this.setState({
-      marker: {
-        longitude: event.lngLat[0],
-        latitude: event.lngLat[1]
-      }
-    });
-    console.log("Longitude:",event.lngLat[0], "Latitude:", event.lngLat[1]);
-  };
+  // _onMarkerDragEnd = event => {
+  //   this._logDragEvent('onDragEnd', event);
+  //   this.setState({
+  //     marker: {
+  //       longitude: event.lngLat[0],
+  //       latitude: event.lngLat[1]
+  //     }
+  //   });
+  //   console.log("Longitude:",event.lngLat[0], "Latitude:", event.lngLat[1]);
+  // };
 
   componentDidMount() {
     axios.get('/community_requests.json')
@@ -92,9 +86,22 @@ class Map extends React.Component {
     })
   }
 
-  _onClickMarker = event => {
-    this.setState({popupInfo: event});
-    console.log("Clicked");
+  // loadRequests = () => {
+  //   return this.state.community_requests.map(community_request => {
+  //     return (
+  //       <Marker 
+  //         key={community_request.id}
+  //         latitude={parseFloat(community_request.location_lat)}
+  //         longitude={parseFloat(community_request.location_long)}
+  //       >
+  //       </Marker>
+  //     )
+  //   })
+  // }
+
+  _onClickMarker = community_request => {
+    this.setState({popupInfo: community_request});
+    console.log(community_request.location_lat);
   };
 
   _renderPopup() {
@@ -105,12 +112,12 @@ class Map extends React.Component {
         <Popup
           tipSize={5}
           anchor="top"
-          longitude={popupInfo.longitude}
-          latitude={popupInfo.latitude}
+          longitude={parseFloat(popupInfo.location_long)}
+          latitude={parseFloat(popupInfo.location_lat)}
           closeOnClick={false}
           onClose={() => this.setState({popupInfo: null})}
         >
-          <community_requests info={popupInfo} />
+          <Request info={popupInfo} />
         </Popup>
       )
     );
@@ -119,7 +126,7 @@ class Map extends React.Component {
   render(){
     // const {viewport, marker} = this.state;
     const {showPopup} = this.state;
-    const setSelectedPark = this.state;
+
     return (
       <div>
         <h1>Map, get involved now!</h1>
@@ -135,6 +142,10 @@ class Map extends React.Component {
             onDblClick ={this.onDblClick}
             doubleClickZoom ={false}
           >
+            <MapPin data={this.state.community_requests} onClick={this._onClickMarker} />
+            {this._renderPopup()}
+
+            {/* {this.loadRequests()}
           {this.state.community_requests.map(community_request => (
             <Marker
               {...this.state.community_requests}
@@ -142,32 +153,32 @@ class Map extends React.Component {
                 latitude={parseFloat(community_request.location_lat)}
                 longitude={parseFloat(community_request.location_long)}
               > 
-              {/* <button
+              <button
                 className="marker-btn"
                   onClick={e => {
                     e.preventDefault();
-                    setSelectedPark(community_request);
+                    // setSelectedPark(community_request);
                   }}
                 >
                 <img src="" alt="Skate Park Icon" />
-              </button> */}
-              <MapPin size={20} data={this.state.community_requests} onClick={this._onClickMarker}/>
+              </button>
+                  <MapPin size={20} onClick={this._onClickMarker} />
               {this._renderPopup()}
+              {showPopup && <Popup
+                  latitude={parseFloat(community_request.location_lat)}
+                  longitude={parseFloat(community_request.location_long)}
+                  closeButton={true}
+                  closeOnClick={false}
+                  onClose={() => this.setState({showPopup: false})}
+                  anchor="top"
+                > 
+                <div>
+                  {community_request.title}
+                </div>           
+                </Popup>}  
             </Marker>
-          ))}
+          ))} */}
           
-          {/* {showPopup && <Popup
-              longitude={-0.1372005686243379}
-              latitude={51.50805600061942}
-              closeButton={true}
-              closeOnClick={false}
-              onClose={() => this.setState({showPopup: false})}
-              anchor="top"
-            > 
-            <div>
-              You are here!
-            </div>           
-            </Popup>}   */}
             
         </ReactMapGL>
       </div>
