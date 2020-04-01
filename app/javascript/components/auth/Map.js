@@ -141,10 +141,16 @@ class Map extends React.Component {
             onClick ={this.onClickMap}
             onDblClick ={this.onDblClick}
             doubleClickZoom ={false}
-          >
-            <MapPin data={this.state.community_requests} onClick={this._onClickMarker} />
+          > 
+          {this.state.community_requests.map(community_request => (
+            <MapPin 
+              {...this.state.community_requests}
+              key={community_request.id}
+              data={this.state.community_requests} 
+              onClick={this._onClickMarker} />
+          ))
+          }
             {this._renderPopup()}
-
             {/* {this.loadRequests()}
           {this.state.community_requests.map(community_request => (
             <Marker
