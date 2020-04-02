@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 import MapPin from './MapPin';
-import Request from './Request';
+import Requests from './Requests';
 import axios from 'axios';
 
 const TOKEN = 'pk.eyJ1IjoiZGF2aWQyMDRjb2RlMSIsImEiOiJjazc2YjdobGUwOTI0M2VvamwwZXpvZGR1In0.FSpShMuhbroEHA9-0iG4sg';
@@ -117,7 +117,7 @@ class Map extends React.Component {
           closeOnClick={false}
           onClose={() => this.setState({popupInfo: null})}
         >
-          <Request info={popupInfo} />
+          <Requests info={popupInfo} />
         </Popup>
       )
     );
@@ -142,15 +142,28 @@ class Map extends React.Component {
             onDblClick ={this.onDblClick}
             doubleClickZoom ={false}
           > 
+          
           {this.state.community_requests.map(community_request => (
             <MapPin 
               {...this.state.community_requests}
               key={community_request.id}
               data={this.state.community_requests} 
-              onClick={this._onClickMarker} />
+              onClick={this._onClickMarker} 
+            />
           ))
           }
-            {this._renderPopup()}
+           {this._renderPopup()}
+
+            {/* <MapPin 
+              {...this.state.community_requests}
+              // key={community_requests.id}
+              data={this.state.community_requests} 
+              onClick={this._onClickMarker} 
+            />
+            {this._renderPopup()} */}
+
+
+
             {/* {this.loadRequests()}
           {this.state.community_requests.map(community_request => (
             <Marker

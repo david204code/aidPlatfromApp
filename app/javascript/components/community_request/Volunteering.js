@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ReactMapGL, {Marker} from 'react-map-gl';
-import MapPin from '../auth/MapPin';
+import SetPin from './SetPin';
 import 'mapbox-gl/dist/mapbox-gl.css';
 // import Map from '../auth/Map';
 
@@ -129,7 +129,7 @@ class Volunteering extends React.Component {
             onDrag={this._onMarkerDrag}
             onDragEnd={this._onMarkerDragEnd}
             >
-            <MapPin size={20} />
+            <SetPin size={20} />
           </Marker>
         </ReactMapGL>
         <form onSubmit={this.handleSubmit}>          
