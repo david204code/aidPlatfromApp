@@ -25,9 +25,21 @@ class CommunityRequestsController < ApplicationController
 
   # Get request
   def index
-    @community_requests = CommunityRequest.all
+    @community_request = CommunityRequest.all
     # @community_requests = CommunityRequest.first
-    render json: { data: @community_requests }
+    render json: { data: @community_request }
   end
+
+  def show
+    @community_request ||= CommunityRequest.find(params[:id])
+    # render json: { data: @community_request }
+    render json: @community_request
+  end
+
+  private 
+
+  # def communityRequest
+  #   @community_request ||= CommunityRequest.find(params[:id])
+  # end
 
 end

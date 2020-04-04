@@ -9,6 +9,7 @@ import Welcome from './pages/Welcome';
 import Registration from './auth/Registration';
 import SignUp from './auth/SignUp';
 import Login from './auth/Login';
+import Request from './auth/Request';
 
 class App extends React.Component {
 
@@ -127,6 +128,9 @@ class App extends React.Component {
                 />
               )}
               // component ={Map}
+            />
+            <Route 
+              path="/community_request/:id" exact component={Request}
             />
 
             <Route

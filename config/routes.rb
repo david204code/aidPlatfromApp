@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get :logged_in, to: "sessions#logged_in"
   resources :community_requests
   get 'community_requests', to: 'community_requests#index'
+  # get '/community_requests/:id', to: 'community_requests#show'
   root 'pages#index'
   
   get 'pages/index'
