@@ -141,7 +141,7 @@ class Map extends React.Component {
               Make your own request to help others or ask for help
             </p>
             <div className ="row">
-              <div className ="col-md-4 offset-2">
+              <div className ="col-md-4 offset-md-2">
                 <Link 
                   to ='/Volunteering'
                   className =''

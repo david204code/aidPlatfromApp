@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactMapGL, {Marker} from 'react-map-gl';
 import SetPin from './SetPin';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { Link } from 'react-router-dom';
 // import Map from '../auth/Map';
 
 const TOKEN = 'pk.eyJ1IjoiZGF2aWQyMDRjb2RlMSIsImEiOiJjazc2YjdobGUwOTI0M2VvamwwZXpvZGR1In0.FSpShMuhbroEHA9-0iG4sg';
@@ -107,74 +108,129 @@ class Volunteering extends React.Component {
     const {viewport, marker} = this.state;
     return (
       <div>
-        {/* <Map /> */}
-        <ReactMapGL
-          {...this.state.viewport}
-          width="60vw"
-          height="60vh"
-          mapStyle="mapbox://styles/mapbox/streets-v11"
-          onViewportChange={viewport => this.setState({viewport})}
-          mapboxApiAccessToken={TOKEN}
-          onClick ={this.onClickMap}
-          onDblClick ={this.onDblClick}
-          doubleClickZoom ={false}
-          >
-          <Marker 
-            latitude={marker.latitude} 
-            longitude={marker.longitude} 
-            offsetLeft={-20} 
-            offsetTop={-10}
-            draggable
-            onDragStart={this._onMarkerDragStart}
-            onDrag={this._onMarkerDrag}
-            onDragEnd={this._onMarkerDragEnd}
+        <div className ="jumbotron jumbotron-fluid text-center">
+          <h1>Thank you for Volunteering!</h1>
+          <p>We are excited you want to volunteer. Fill in the form below</p>
+        </div>
+
+        <div className ="container">
+          <div>
+            <Link
+              to ="/map"
+              className =""
+              role ="button"
             >
-            <SetPin size={20} />
-          </Marker>
-        </ReactMapGL>
-        <form onSubmit={this.handleSubmit}>          
-          <input
-            type ="text"
-            name ="title"
-            placeholder ="title of request"
-            value ={this.state.title}
-            onChange ={this.handleChange}
-          />
+              <button className ="">
+                Back to the map
+              </button> 
+            </Link>
+          </div>
+          <div className ="offset-md-1">
+            {/* <Map /> */}
+            <p className ="text-center">
+              Drag and drop the marker to your position to let others know where you
+              are located in your community.
+            </p>
+            <ReactMapGL
+              {...this.state.viewport}
+              width="70vw"
+              height="60vh"
+              mapStyle="mapbox://styles/mapbox/streets-v11"
+              onViewportChange={viewport => this.setState({viewport})}
+              mapboxApiAccessToken={TOKEN}
+              onClick ={this.onClickMap}
+              onDblClick ={this.onDblClick}
+              doubleClickZoom ={false}
+              >
+              <Marker 
+                latitude={marker.latitude} 
+                longitude={marker.longitude} 
+                offsetLeft={-20} 
+                offsetTop={-10}
+                draggable
+                onDragStart={this._onMarkerDragStart}
+                onDrag={this._onMarkerDrag}
+                onDragEnd={this._onMarkerDragEnd}
+                >
+                <SetPin size={20} />
+              </Marker>
+            </ReactMapGL>
+            <div className ="row pt-2 text-center">
+              <div className ="col-md-4 offset-md-2">
+                <label>Marker's Longitude</label>
+                <input
+                  type ="text"
+                  name ="location_long"
+                  className ="form-control"
+                  placeholder ="location_long"
+                  value ={this.state.location_long}
+                  // onChange ={this.handleChange}
+                />
+              </div>
 
-          <input
-            type ="text"
-            name ="description"
-            placeholder ="description"
-            value ={this.state.description}
-            onChange ={this.handleChange}
-          />
+              <div className ="col-md-4">
+                <label>Marker's Latitude</label>
+                <input
+                  type ="text"
+                  name ="location_lat"
+                  className ="form-control"
+                  placeholder ="location_lat"
+                  value ={this.state.location_lat}
+                  // onChange ={this.handleChange}
+                />
+              </div>
+            </div>
+          </div>
 
-          <input
-            type ="text"
-            name ="request_type"
-            placeholder ="request_type"
-            value ={this.state.request_type}
-            onChange ={this.handleChange}
-          />
+          <div className ="row py-4">
+            <div className ="col-md-8 offset-md-2 text-center">
+              <h1 className =""> 
+                Volunteer 
+              </h1>
+              <form onSubmit={this.handleSubmit}>
+                <div className ="form-group col-md-4 offset-md-4">
+                  <label htmlFor ="volTitle">Title</label>
+                  <input
+                    type ="text"
+                    name ="title"
+                    id ="volTitle"
+                    className ="form-control"
+                    placeholder ="title of request"
+                    required
+                    value ={this.state.title}
+                    onChange ={this.handleChange}
+                  />
+                </div>          
 
-          <input
-            type ="text"
-            name ="location_long"
-            placeholder ="location_long"
-            value ={this.state.location_long}
-            onChange ={this.handleChange}
-          />
+                <div className ="form-group">
+                  <label htmlFor ="volDescription">Description</label>
+                  <textarea
+                    type ="text"
+                    name ="description"
+                    id ="volDescription"
+                    className ="form-control"
+                    placeholder ="Describe what you will be providing, the more the detail the better"
+                    rows ="5"
+                    required
+                    value ={this.state.description}
+                    onChange ={this.handleChange}
+                  />
+                </div>
 
-          <input
-            type ="text"
-            name ="location_lat"
-            placeholder ="location_lat"
-            value ={this.state.location_lat}
-            onChange ={this.handleChange}
-          />
+                <div className ="col-md-4 offset-md-4 pb-4">
+                  <label htmlFor ="volType">Type of Request:</label>
+                  <select id ="volType" className ="form-control">
+                    <option disabled selected value>Select type of request</option>
+                    <option value ="one-time">One-Time task</option>
+                    <option value ="material-need">Material-Need</option>
+                  </select>
+                </div>
+                <button type ="submit">Volunteer</button>
+              </form>
+            </div>
+          </div>
 
-          <button type ="submit">Volunteer</button>
-        </form>
+        </div>
       </div>
     )
   }
