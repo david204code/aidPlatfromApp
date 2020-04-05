@@ -5,6 +5,7 @@ import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 import MapPin from './MapPin';
 import Requests from './Requests';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const TOKEN = 'pk.eyJ1IjoiZGF2aWQyMDRjb2RlMSIsImEiOiJjazc2YjdobGUwOTI0M2VvamwwZXpvZGR1In0.FSpShMuhbroEHA9-0iG4sg';
 
@@ -23,11 +24,6 @@ class Map extends React.Component {
         pitch: 0
       },
 
-      marker: {
-        latitude: 51.508,
-        longitude: -0.140
-      },
-
       popupInfo: null,
 
       event: {}
@@ -41,26 +37,6 @@ class Map extends React.Component {
   onDblClick(e) {
     console.log("Hi", e.lngLat[0], e.lngLat[1]);
   }
-
-  // _logDragEvent(name, event) {
-  //   this.setState({
-  //     events: {
-  //       ...this.state.events,
-  //       [name]: event.lngLat
-  //     }
-  //   });
-  // }
- 
-  // _onMarkerDragEnd = event => {
-  //   this._logDragEvent('onDragEnd', event);
-  //   this.setState({
-  //     marker: {
-  //       longitude: event.lngLat[0],
-  //       latitude: event.lngLat[1]
-  //     }
-  //   });
-  //   console.log("Longitude:",event.lngLat[0], "Latitude:", event.lngLat[1]);
-  // };
 
   componentDidMount() {
     axios.get('/community_requests.json')
@@ -85,19 +61,6 @@ class Map extends React.Component {
 
     })
   }
-
-  // loadRequests = () => {
-  //   return this.state.community_requests.map(community_request => {
-  //     return (
-  //       <Marker 
-  //         key={community_request.id}
-  //         latitude={parseFloat(community_request.location_lat)}
-  //         longitude={parseFloat(community_request.location_long)}
-  //       >
-  //       </Marker>
-  //     )
-  //   })
-  // }
 
   _onClickMarker = community_request => {
     this.setState({popupInfo: community_request});
@@ -124,82 +87,85 @@ class Map extends React.Component {
   }
 
   render(){
-    // const {viewport, marker} = this.state;
     const {showPopup} = this.state;
 
     return (
       <div>
-        <h1>Map, get involved now!</h1>
-        <h1>Status: {this.props.loggedInStatus}</h1>
-        <ReactMapGL
-          {...this.state.viewport}
-            width="60vw"
-            height="60vh"
-            mapStyle="mapbox://styles/mapbox/streets-v11"
-            onViewportChange={viewport => this.setState({viewport})}
-            mapboxApiAccessToken={TOKEN}
-            onClick ={this.onClickMap}
-            onDblClick ={this.onDblClick}
-            doubleClickZoom ={false}
-          > 
-          
-          {this.state.community_requests.map(community_request => (
-            <MapPin 
-              {...this.state.community_requests}
-              key={community_request.id}
-              data={this.state.community_requests} 
-              onClick={this._onClickMarker} 
-            />
-          ))
-          }
-           {this._renderPopup()}
+        <div className ="jumbotron jumbotron-fluid text-center">
+          <h1>Map, get involved now!</h1>
+          <h1>Status: {this.props.loggedInStatus}</h1>
+          <div className ="offset-2">
+            <h4 className ="text-left">Hello User</h4>
+          </div>
+        </div>
 
-            {/* <MapPin 
-              {...this.state.community_requests}
-              // key={community_requests.id}
-              data={this.state.community_requests} 
-              onClick={this._onClickMarker} 
-            />
-            {this._renderPopup()} */}
+        <div className ="container">
+          <div className ="">
+            <p className ="text-center">
+              Browse the map below and take a good look around! Respond if it is something that
+              interest you.
+            </p>
+            <p className ="text-center">
+              The markers are request or post made by someone in your community
+            </p>
+          </div>
 
-
-
-            {/* {this.loadRequests()}
-          {this.state.community_requests.map(community_request => (
-            <Marker
-              {...this.state.community_requests}
-                key={community_request.id}
-                latitude={parseFloat(community_request.location_lat)}
-                longitude={parseFloat(community_request.location_long)}
+          <div className ="offset-md-1">
+            <ReactMapGL
+              {...this.state.viewport}
+                width="70vw"
+                height="60vh"
+                mapStyle="mapbox://styles/mapbox/streets-v11"
+                onViewportChange={viewport => this.setState({viewport})}
+                mapboxApiAccessToken={TOKEN}
+                onClick ={this.onClickMap}
+                onDblClick ={this.onDblClick}
+                doubleClickZoom ={false}
               > 
-              <button
-                className="marker-btn"
-                  onClick={e => {
-                    e.preventDefault();
-                    // setSelectedPark(community_request);
-                  }}
-                >
-                <img src="" alt="Skate Park Icon" />
-              </button>
-                  <MapPin size={20} onClick={this._onClickMarker} />
-              {this._renderPopup()}
-              {showPopup && <Popup
-                  latitude={parseFloat(community_request.location_lat)}
-                  longitude={parseFloat(community_request.location_long)}
-                  closeButton={true}
-                  closeOnClick={false}
-                  onClose={() => this.setState({showPopup: false})}
-                  anchor="top"
-                > 
-                <div>
-                  {community_request.title}
-                </div>           
-                </Popup>}  
-            </Marker>
-          ))} */}
+              
+              {this.state.community_requests.map(community_request => (
+                <MapPin 
+                  {...this.state.community_requests}
+                  key={community_request.id}
+                  data={this.state.community_requests} 
+                  onClick={this._onClickMarker} 
+                />
+              ))
+              }
+              {this._renderPopup()}                      
+            </ReactMapGL>
+          </div>
           
-            
-        </ReactMapGL>
+          <div className ="pb-5 text-center">
+            <p className ="text-center pt-3">
+              Make your own request to help others or ask for help
+            </p>
+            <div className ="row">
+              <div className ="col-md-4 offset-2">
+                <Link 
+                  to ='/Volunteering'
+                  className =''
+                  role ='button'
+                >
+                  <button>
+                    Click here to volunteer
+                  </button>
+                </Link>
+              </div>
+              <div className ="col-md-4">
+                <Link 
+                  to ='/'
+                  className =''
+                  role ='button'
+                >
+                  <button>
+                    Click here to ask for help
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>          
+        </div>
       </div>
     );
   }
