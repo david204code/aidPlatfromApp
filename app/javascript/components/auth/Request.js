@@ -30,13 +30,44 @@ class Request extends React.Component {
     const { community_request } = this.state;
     return( 
       <div>
-        <h1>Hello</h1>
-        <h2>{community_request.id}</h2>
-        <h2>{community_request.title}</h2>
-        <h2>{community_request.description}</h2>
-        <h2>{community_request.request_type}</h2>
-        <h2>{community_request.status}</h2>
-        <h2>{community_request.fulfilled}</h2>
+        <section className ="jumbotron jumbotron-fluid text-center">
+          <div className ="container py-1">
+            <h1 className ="display-4">
+              Request
+            </h1>
+            <p className ="lead">
+              We are connecting people in our community to help and support each other
+            </p>
+          </div>
+        </section>
+
+        <div>
+          <Link
+            to ="/map"
+            className =""
+            role ="button"
+          >
+            <button className ="">
+              Back to the map
+            </button> 
+          </Link>
+        </div>
+        
+        <div className ="container py-1">
+          <h1 className ="text-center display-4">
+            Request title: {community_request.title}
+          </h1>
+
+          <h2>Request ID: {community_request.id}</h2>
+          <h2>Description
+          </h2>
+            <p>
+              {community_request.description}  
+            </p>
+          <h2>Type of Request: {community_request.request_type}</h2>
+          <p>Status of the request: This request has {community_request.status} of responds</p>
+          <p>This request is {community_request.fulfilled} currently</p>
+        </div>
         
       </div>
     )
