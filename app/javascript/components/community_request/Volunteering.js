@@ -95,6 +95,7 @@ class Volunteering extends React.Component {
       console.log("registration", error);
     });
     event.preventDefault();
+    alert("Congrgulation on volunteering")
     this.props.history.push("/map"); 
   }
 
@@ -158,40 +159,43 @@ class Volunteering extends React.Component {
                 <SetPin size={20} />
               </Marker>
             </ReactMapGL>
-            <div className ="row pt-2 text-center">
-              <div className ="col-md-4 offset-md-2">
-                <label>Marker's Longitude</label>
-                <input
-                  type ="text"
-                  name ="location_long"
-                  className ="form-control"
-                  placeholder ="location_long"
-                  value ={this.state.location_long}
-                  // onChange ={this.handleChange}
-                />
-              </div>
-
-              <div className ="col-md-4">
-                <label>Marker's Latitude</label>
-                <input
-                  type ="text"
-                  name ="location_lat"
-                  className ="form-control"
-                  placeholder ="location_lat"
-                  value ={this.state.location_lat}
-                  // onChange ={this.handleChange}
-                />
-              </div>
-            </div>
           </div>
 
           <div className ="row py-4">
             <div className ="col-md-8 offset-md-2 text-center">
-              <h1 className =""> 
-                Volunteer 
-              </h1>
               <form onSubmit={this.handleSubmit}>
+                <div className ="row text-center pb-4">
+                  <div className ="col-md-4 offset-md-2">
+                    <label>Marker's Longitude</label>
+                      <input
+                        type ="text"
+                        name ="location_long"
+                        className ="form-control"
+                        placeholder ="location_long"
+                        required
+                        value ={this.state.location_long}
+                        onChange ={this.handleChange}
+                      />
+                  </div>
+
+                  <div className ="col-md-4">
+                    <label>Marker's Latitude</label>
+                    <input
+                      type ="text"
+                      name ="location_lat"
+                      className ="form-control"
+                      placeholder ="location_lat"
+                      required
+                      value ={this.state.location_lat}
+                      onChange ={this.handleChange}
+                    />
+                  </div>
+                </div>
+
                 <div className ="form-group col-md-4 offset-md-4">
+                  <h1 className =""> 
+                    Volunteer 
+                  </h1>
                   <label htmlFor ="volTitle">Title</label>
                   <input
                     type ="text"
@@ -207,23 +211,31 @@ class Volunteering extends React.Component {
 
                 <div className ="form-group">
                   <label htmlFor ="volDescription">Description</label>
-                  <textarea
-                    type ="text"
-                    name ="description"
-                    id ="volDescription"
-                    className ="form-control"
-                    placeholder ="Describe what you will be providing, the more the detail the better"
-                    rows ="5"
-                    required
-                    value ={this.state.description}
-                    onChange ={this.handleChange}
-                  />
+                    <textarea
+                      type ="text"
+                      name ="description"
+                      id ="volDescription"
+                      className ="form-control"
+                      placeholder ="Describe what you will be providing, the more the detail the better"
+                      rows ="5"
+                      required
+                      value ={this.state.description}
+                      onChange ={this.handleChange}
+                    />
                 </div>
 
-                <div className ="col-md-4 offset-md-4 pb-4">
-                  <label htmlFor ="volType">Type of Request:</label>
-                  <select id ="volType" className ="form-control">
-                    <option disabled selected value>Select type of request</option>
+                <div className ="col-md-4 offset-md-4 pb-2">
+                  <label htmlFor ="volType">Type of Request:
+                  </label>
+                  <select 
+                    name="request_type"
+                    className="form-control"
+                    required
+                    value={this.state.value}
+                    onChange ={this.handleChange}
+                    defaultValue={'DEFAULT'}
+                  >
+                    <option value='DEFAULT' disabled></option>
                     <option value ="one-time">One-Time task</option>
                     <option value ="material-need">Material-Need</option>
                   </select>
