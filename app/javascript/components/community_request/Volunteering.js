@@ -111,6 +111,9 @@ class Volunteering extends React.Component {
         <div className ="jumbotron jumbotron-fluid text-center">
           <h1>Thank you for Volunteering!</h1>
           <p>We are excited you want to volunteer. Fill in the form below</p>
+          <div className ="offset-2">
+            <h4 className ="text-left">Hello {this.props.user} </h4>
+          </div>
         </div>
 
         <div className ="container">

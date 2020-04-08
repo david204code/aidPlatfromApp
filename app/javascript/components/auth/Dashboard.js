@@ -13,20 +13,7 @@ class Dashboard extends React.Component {
     
     this.state= {
       community_requests: [],
-
-      viewport: {
-        latitude: 51.508,
-        longitude: -0.140,
-        zoom: 14,
-        bearing: 0,
-        pitch: 0
-      },
-
-      marker: {
-        latitude: 51.508,
-        longitude: -0.140
-      },
-
+      
       event: []
     };  
   }
@@ -69,36 +56,11 @@ class Dashboard extends React.Component {
         )
       });
 
-      const {viewport, marker} = this.state;
-
     return (
       <div>
-        <ReactMapGL
-          {...this.state.viewport}
-          width="60vw"
-          height="60vh"
-          mapStyle="mapbox://styles/mapbox/streets-v11"
-          onViewportChange={viewport => this.setState({viewport})}
-          mapboxApiAccessToken={TOKEN}
-          onClick ={this.onClickMap}
-          onDblClick ={this.onDblClick}
-          doubleClickZoom ={false}
-        >
-
-          {this.state.community_requests.map(community_request => (
-            <Marker
-              {...this.state.community_requests}
-              key={community_request.id}
-              latitude={parseFloat(community_request.location_lat)}
-              longitude={parseFloat(community_request.location_long)}
-              // latitude={parseFloat(community_request.location_long)}
-              // longitude={parseFloat(community_request.location_lat)}
-            > 
-              <MapPin size={20} />
-            </Marker>
-          ))}
-
-        </ReactMapGL>
+        <div className ="offset-2">
+          <h4 className ="text-left">Hello {this.props.user} </h4>
+        </div>
         {community_requests}
       </div>
     )

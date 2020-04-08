@@ -95,11 +95,20 @@ class Map extends React.Component {
           <h1>Map, get involved now!</h1>
           <h1>Status: {this.props.loggedInStatus}</h1>
           <div className ="offset-2">
-            <h4 className ="text-left">Hello User</h4>
+            <h4 className ="text-left">Hello {this.props.user} </h4>
           </div>
         </div>
 
         <div className ="container">
+          <Link 
+            to ="/dashboard"
+            className =""
+            role = "button"
+          >
+            <button className ="">
+              Visit your dashboard
+            </button>
+          </Link>
           <div className ="">
             <p className ="text-center">
               Browse the map below and take a good look around! Respond if it is something that

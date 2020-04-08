@@ -91,7 +91,7 @@ class App extends React.Component {
                 />
               )}
             />
-            <Route
+            {/* <Route
               exact path ="/login"
               render ={props => (
                 <Login {...props}
@@ -100,7 +100,7 @@ class App extends React.Component {
                   loggedInStatus={this.state.loggedInStatus}
                 />
               )}
-            />
+            /> */}
             <Route 
               exact path ="/home"
               render ={props => (
@@ -112,22 +112,24 @@ class App extends React.Component {
               )}
             />
             <Route 
-              exact path ={"/dashboard"}
-              render ={props => (
-                <Dashboard {...props}
-                loggedInStatus ={this.state.loggedInStatus} 
-                />
-              )}
-              // component ={Dashboard}
-            />
-            <Route 
               exact path ={"/map"}
               render ={props => (
                 <Map {...props}
-                loggedInStatus ={this.state.loggedInStatus}
+                  loggedInStatus ={this.state.loggedInStatus}
+                  user ={this.state.user.email}
                 />
               )}
               // component ={Map}
+            />
+            <Route 
+              exact path ={"/dashboard"}
+              render ={props => (
+                <Dashboard {...props}
+                  loggedInStatus ={this.state.loggedInStatus}
+                  user ={this.state.user.email} 
+                />
+              )}
+              // component ={Dashboard}
             />
             <Route 
               path="/community_request/:id" exact component={Request}
@@ -135,7 +137,13 @@ class App extends React.Component {
 
             <Route
               exact path ={"/volunteering"}
-              component ={Volunteering}
+              render ={props => (
+                <Volunteering {...props}
+                  loggedInStatus ={this.state.loggedInStatus}
+                  user ={this.state.user.email}
+                /> 
+              )}
+              // component ={Volunteering}
             />
 
           </Switch>

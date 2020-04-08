@@ -100,7 +100,7 @@ class Registration extends React.Component {
               </div>
               <div className ="text-left">
                 <Link 
-                  to ="/login"
+                  to ="/"
                   className =""
                   role = "button"
                   >

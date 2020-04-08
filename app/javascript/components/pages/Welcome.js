@@ -33,13 +33,13 @@ class Welcome extends React.Component {
           <div className ="col-md-5 text-center pt-4">
             <h5>Get involve now!</h5>
             <Link 
-            to ="/signUp"
-            className =""
-            role = "button"
+              to ="/signUp"
+              className =""
+              role = "button"
             >
-            <button className ="">
-              Sign up here
-            </button>
+              <button className ="">
+                Sign up here
+              </button>
             </Link>
           </div>
         </div>
